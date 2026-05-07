@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Mother's Day, Mama Ivy!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe4f1 50%, #ffd4e8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #d81b60;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #c2185b;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin: 30px 0;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .message-box p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .interactive-hearts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .heart-card {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c2185b 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 200px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .heart-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .heart-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .heart-card p {
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .heart-card.revealed p {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .flower {
+            font-size: 3rem;
+            animation: float linear infinite;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c2185b 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-top: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd4e8 0%, #ffb4d4 100%);
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            .message-box p {
+                font-size: 1.1rem;
+            }
+            .heart-card {
+                width: 150px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="photo-frame">🌸</div>
+        <h1>Happy Mother's Day!</h1>
+        <h2 class="subtitle">To the Amazing Mama Ivy</h2>
+
+        <div class="message-box">
+            <p>Today we celebrate YOU - the heart of our family, the source of endless love, and the reason we smile every day.</p>
+            <p>Your kindness, strength, and warmth make the world a brighter place. Thank you for everything you do!</p>
+        </div>
+
+        <div class="interactive-hearts">
+            <div class="heart-card" onclick="revealMessage(this)">
+                <h3>💖 Your Love</h3>
+                <p>Your love is the foundation that holds us together through every season of life.</p>
+            </div>
+            <div class="heart-card" onclick="revealMessage(this)">
+                <h3>🌟 Your Strength</h3>
+                <p>You inspire us with your courage and resilience. You're our superhero!</p>
+            </div>
+            <div class="heart-card" onclick="revealMessage(this)">
+                <h3>🌺 Your Wisdom</h3>
+                <p>Your guidance and wisdom light our path. Thank you for always knowing what to say.</p>
+            </div>
+            <div class="heart-card" onclick="revealMessage(this)">
+                <h3>☀️ Your Joy</h3>
+                <p>Your laughter and smile brighten even the darkest days. You're our sunshine!</p>
+            </div>
+        </div>
+
+        <div class="message-box">
+            <p><strong>We love you more than words can express, Mama Ivy!</strong></p>
+            <p>May your day be filled with joy, laughter, and all the love you deserve.</p>
+        </div>
+
+        <button onclick="createCelebration()">Click for a Special Surprise! 🎉</button>
+    </div>
+
+    <script>
+        function revealMessage(card) {
+            card.classList.toggle('revealed');
+        }
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-hearts flower';
+            const symbols = ['🌸', '💐', '🌺', '🌷', '💖', '💕', '🌹', '✨'];
+            heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 2 + 2) + 'rem';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        function createCelebration() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createFloatingHeart();
+                }, i * 100);
+            }
+        }
+
+        // Auto-create some floating elements on load
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                createFloatingHeart();
+            }
+        }, 2000);
+
+        // Create initial celebration
+        window.addEventListener('load', () => {
+            setTimeout(createCelebration, 500);
+        });
+    </script>
+</body>
+</html>
