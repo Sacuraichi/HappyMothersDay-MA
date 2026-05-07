@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Mother's Day, Tita Ivy! 💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe4f3 50%, #ffd6eb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #d81b60;
+            margin-bottom: 20px;
+            animation: fadeInDown 1.5s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #c2185b;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #880e4f;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(216, 27, 96, 0.2);
+            animation: fadeIn 2s ease-out 1s both;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #f06292 0%, #ec407a 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(236, 64, 122, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(236, 64, 122, 0.6);
+        }
+
+        .button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ec407a;
+            transform: rotate(45deg);
+            animation: float 4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ec407a;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            left: 10px;
+            top: 0;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall 8s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(45deg) scale(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(45deg) scale(1);
+            }
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .special-message {
+            font-size: 2rem;
+            color: #d81b60;
+            margin: 30px 0;
+            animation: bounceIn 1s ease-out;
+            font-weight: bold;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            border: 10px solid white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            font-size: 4rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .message {
+                font-size: 1rem;
+                padding: 20px;
+            }
+            .button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💐 Happy Mother's Day! 💐</h1>
+        <div class="subtitle">To the wonderful Tita Ivy</div>
+
+        <div class="message">
+            Your love, kindness, and warmth light up every room you enter.
+            Thank you for being such an amazing person and for all the joy you bring to our lives.
+            Today we celebrate YOU and all the wonderful things you do!
+        </div>
+
+        <div class="photo-frame">
+            💝
+        </div>
+
+        <button class="button" onclick="showSurprise()">Click for a Special Message! 🎁</button>
+        <button class="button" onclick="createHeartExplosion()">Send Love! 💕</button>
+
+        <div id="surprise" class="special-message hidden">
+            You are loved more than words can say!
+            Thank you for being YOU! ✨
+        </div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        function createFlower() {
+            const flowers = ['🌸', '🌺', '🌹', '🌷', '🌼', '💐', '🌻'];
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            flower.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, 10000);
+        }
+
+        setInterval(createHeart, 300);
+        setInterval(createFlower, 500);
+
+        function showSurprise() {
+            const surprise = document.getElementById('surprise');
+            surprise.classList.remove('hidden');
+
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createSparkle();
+                }, i * 50);
+            }
+        }
+
+        function createHeartExplosion() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.textContent = '💖';
+                    heart.style.position = 'absolute';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                    heart.style.transition = 'all 2s ease-out';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        const angle = (Math.random() * 360) * Math.PI / 180;
+                        const distance = Math.random() * 300 + 100;
+                        heart.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) rotate(${Math.random() * 360}deg)`;
+                        heart.style.opacity = '0';
+                    }, 10);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }, i * 30);
+            }
+        }
+
+        function createSparkle() {
+            const sparkles = ['✨', '⭐', '🌟', '💫'];
+            const sparkle = document.createElement('div');
+            sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.fontSize = (Math.random() * 30 + 20) + 'px';
+            sparkle.style.animation = 'fadeIn 0.5s ease-out, fadeOut 0.5s ease-out 0.5s';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+
+        document.body.addEventListener('click', (e) => {
+            const sparkle = document.createElement('div');
+            sparkle.textContent = '💕';
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.fontSize = '24px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'float 2s ease-out';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
