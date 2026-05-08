@@ -434,29 +434,37 @@
             color: #ff69b4;
         }
 
+        .modal-nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+            padding: 15px;
+        }
+
         .modal-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
             font-size: 40px;
             color: white;
             cursor: pointer;
-            padding: 20px;
+            padding: 15px 25px;
             user-select: none;
             transition: all 0.3s;
+            background: rgba(255, 105, 180, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-nav:hover {
             color: #ff69b4;
-            transform: translateY(-50%) scale(1.2);
+            background: rgba(255, 105, 180, 0.5);
+            transform: scale(1.2);
         }
 
-        .prev {
-            left: 20px;
-        }
-
-        .next {
-            right: 20px;
+        .modal-nav:active {
+            transform: scale(1.1);
         }
 
         .modal-caption {
@@ -535,16 +543,13 @@
             }
 
             .modal-nav {
-                font-size: 30px;
-                padding: 10px;
+                font-size: 35px;
+                padding: 12px 20px;
             }
 
-            .prev {
-                left: 10px;
-            }
-
-            .next {
-                right: 10px;
+            .modal-nav-container {
+                gap: 20px;
+                margin-top: 15px;
             }
 
             .modal-caption {
@@ -650,11 +655,13 @@
 
     <div id="imageModal" class="modal" onclick="closeModal()">
         <span class="close-modal">&times;</span>
-        <span class="modal-nav prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</span>
-        <span class="modal-nav next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</span>
         <div class="modal-content" onclick="event.stopPropagation()">
             <img id="modalImg" src="" alt="Memory">
             <div id="modalCaption" class="modal-caption"></div>
+            <div class="modal-nav-container">
+                <span class="modal-nav" onclick="changeImage(-1)">&#10094;</span>
+                <span class="modal-nav" onclick="changeImage(1)">&#10095;</span>
+            </div>
         </div>
     </div>
 
