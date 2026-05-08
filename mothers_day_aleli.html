@@ -759,6 +759,9 @@
             { src: '3.JPG', caption: 'Making memories every day 🌟' }
         ];
 
+        let touchStartX = 0;
+        let touchEndX = 0;
+
         function openModal(index) {
             currentImageIndex = index;
             const modal = document.getElementById('imageModal');
@@ -810,6 +813,31 @@
                 closeMessageModal();
             }
         });
+
+        // Touch swipe support for mobile
+        document.getElementById('imageModal').addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        }, false);
+
+        document.getElementById('imageModal').addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance for swipe
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next image
+                    changeImage(1);
+                } else {
+                    // Swipe right - previous image
+                    changeImage(-1);
+                }
+            }
+        }
 
         window.onload = function() {
             createHearts();
