@@ -666,12 +666,87 @@
     </div>
 
     <script>
+        // Audio Context for sound effects
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let bgMusic = null;
+
+        // Background music (soft melody)
+        function startBackgroundMusic() {
+            if (bgMusic) return; // Already playing
+
+            bgMusic = setInterval(() => {
+                playNote(523.25, 0.3, 0.05); // C5
+                setTimeout(() => playNote(659.25, 0.3, 0.05), 300); // E5
+                setTimeout(() => playNote(783.99, 0.3, 0.05), 600); // G5
+                setTimeout(() => playNote(659.25, 0.3, 0.05), 900); // E5
+            }, 1200);
+        }
+
+        // Play a musical note
+        function playNote(frequency, duration, volume = 0.1) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        // Door opening sound effect
+        function playDoorSound() {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.5);
+            oscillator.type = 'sawtooth';
+
+            gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.5);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 1.5);
+        }
+
+        // Heart sound effect (soft chime)
+        function playHeartSound() {
+            playNote(880, 0.2, 0.08); // A5
+            setTimeout(() => playNote(1046.5, 0.2, 0.08), 50); // C6
+        }
+
+        // Confetti sound effect (celebration)
+        function playConfettiSound() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const freq = 800 + Math.random() * 400;
+                    playNote(freq, 0.1, 0.05);
+                }, i * 50);
+            }
+        }
+
         function openDoors() {
             const doorContainer = document.getElementById('doorContainer');
             const doorLeft = document.getElementById('doorLeft');
             const doorRight = document.getElementById('doorRight');
             const welcomeSection = document.getElementById('welcomeSection');
             const interactiveSection = document.getElementById('interactiveSection');
+
+            // Play door opening sound
+            playDoorSound();
+
+            // Start background music
+            startBackgroundMusic();
 
             // Show door container
             doorContainer.classList.add('active');
@@ -701,6 +776,9 @@
             const container = document.getElementById('heartsContainer');
             const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝'];
 
+            // Play heart sound effect
+            playHeartSound();
+
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
@@ -711,6 +789,11 @@
                     heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
                     container.appendChild(heart);
 
+                    // Play subtle chime for some hearts
+                    if (i % 5 === 0) {
+                        setTimeout(() => playNote(1318.51, 0.15, 0.04), i * 100); // E6
+                    }
+
                     setTimeout(() => {
                         heart.remove();
                     }, 4000);
@@ -720,6 +803,90 @@
 
         function showLove() {
             document.getElementById('messageModal').style.display = 'block';
+
+            // Trigger confetti from both sides
+            sideConfettiExplosion();
+        }
+
+        // Confetti explosion from left and right sides
+        function sideConfettiExplosion() {
+            const colors = ['#ff69b4', '#ff1493', '#ffc0cb', '#ff6347', '#ffd700', '#9370db'];
+
+            // Play celebration sound
+            playConfettiSound();
+
+            // Left side explosion
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = '0px';
+                    confetti.style.top = '50%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.position = 'fixed';
+                    confetti.style.zIndex = '999';
+
+                    // Random angle shooting to the right
+                    const angle = (Math.random() * 60 - 30) * Math.PI / 180; // -30 to +30 degrees
+                    const distance = Math.random() * 400 + 200;
+                    const endX = Math.cos(angle) * distance;
+                    const endY = Math.sin(angle) * distance;
+
+                    confetti.style.animation = 'none';
+                    document.body.appendChild(confetti);
+
+                    confetti.animate([
+                        { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+                        { transform: `translate(${endX}px, ${endY}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                    ], {
+                        duration: 1500,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 1500);
+                }, i * 20);
+            }
+
+            // Right side explosion
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.right = '0px';
+                    confetti.style.left = 'auto';
+                    confetti.style.top = '50%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.position = 'fixed';
+                    confetti.style.zIndex = '999';
+
+                    // Random angle shooting to the left
+                    const angle = (Math.random() * 60 - 30) * Math.PI / 180; // -30 to +30 degrees
+                    const distance = Math.random() * 400 + 200;
+                    const endX = -Math.cos(angle) * distance;
+                    const endY = Math.sin(angle) * distance;
+
+                    confetti.style.animation = 'none';
+                    document.body.appendChild(confetti);
+
+                    confetti.animate([
+                        { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+                        { transform: `translate(${endX}px, ${endY}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                    ], {
+                        duration: 1500,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 1500);
+                }, i * 20);
+            }
         }
 
         function closeMessageModal() {
@@ -736,6 +903,9 @@
         function celebrateWithConfetti() {
             const colors = ['#ff69b4', '#ff1493', '#ffc0cb', '#ff6347', '#ffd700', '#9370db'];
 
+            // Play celebration sound effect
+            playConfettiSound();
+
             for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
@@ -748,6 +918,14 @@
                     confetti.style.position = 'fixed';
                     confetti.style.zIndex = '999';
                     document.body.appendChild(confetti);
+
+                    // Add extra celebration sounds periodically
+                    if (i % 20 === 0) {
+                        setTimeout(() => {
+                            playNote(1046.5, 0.1, 0.06); // C6
+                            setTimeout(() => playNote(1318.51, 0.1, 0.06), 50); // E6
+                        }, i * 30);
+                    }
 
                     setTimeout(() => {
                         confetti.remove();
